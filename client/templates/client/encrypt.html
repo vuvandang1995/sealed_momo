@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 
 {% block content %}
-   <form method="POST" action="">
+   <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
       <label for="cluster">Cluster</label>
@@ -18,24 +18,24 @@
     </div>
     <div class="form-group">
       <label for="secret-type">Secret Type</label>
-      <select class="form-control" id="secret-type">
+      <select class="form-control" id="secret_type" name="secret_type">
         <option value="opaque">Opaque</option>
         <option value="tls">TLS</option>
       </select>
     </div>
     <div class="form-group">
       <label for="secret-name">Secret Name</label>
-      <input type="text" class="form-control" name="secret-name" placeholder="" required>
+      <input type="text" class="form-control" name="secret_name" placeholder="" required>
     </div>
   
     <div class="form-group" id="list_data">
       <label for="secret-data">Secret Data</label>
       <div class="form-group row data">
          <div class="col">
-         <input type="text" class="form-control key" placeholder="Key" required>
+         <input type="text" class="form-control key" placeholder="Key" required name="data_key">
          </div>
          <div class="col">
-         <input type="text" class="form-control value" placeholder="Value" required>
+         <input type="text" class="form-control value" placeholder="Value" required name="data_value">
          </div>
          <div class="col">
             <button class="btn btn-success add_items_data" type="button">Add</button>
@@ -47,18 +47,27 @@
 
     <div class="form-group">
       <label for="file">File input</label>
-      <input type="file" class="form-control-file" id="file" multiple onchange="javascript:updateList()">
+      <input type="file" class="form-control-file" id="file" multiple onchange="javascript:updateList()" name="input_file">
       <p>Selected files:</p>
       <div id="fileList"></div>
     </div>
 
-    <button class="btn btn-primary" type="button" id="encrypt">Submit</button>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" id="encrypt">Submit</button>
+    </div>
   </form>
   <form>
    <div class="form-group">
       <label for="output">Output</label>
-      <input type="text" class="form-control" name="secret-name" value="{{ key }} : {{ encrypted }}" readonly>
+      <textarea class="form-control-file" rows="4" cols="50" readonly>{{ output }}</textarea>
     </div>
   </form>
+  <!-- <form method="POST" action="/client/">
+    {% csrf_token %}
+    <p>First Name: <input type="text" name="firstname"></p>
+    <p>Last Name: <input type="text" name="lastname"></p>
+    <p><input type="submit" value="submit"></p>
+    <p>{{ ketqua }}</p>
+</form> -->
 
 {% endblock %}

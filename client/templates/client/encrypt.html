@@ -1,0 +1,64 @@
+{% extends 'client/base.html' %}
+
+{% block content %}
+   <form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="cluster">Cluster</label>
+      <select class="form-control" id="cluster" name="cluster">
+        <option value="momo-on-prem">momo-on-prem</option>
+        <option value="devops">devops</option>
+        <option value="gitlab-runner">gitlab-runner</option>
+        <option value="gke-hn-lab">gke-hn-lab</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="namespace">Namespace</label>
+      <input type="text" class="form-control" name="namespace" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label for="secret-type">Secret Type</label>
+      <select class="form-control" id="secret-type">
+        <option value="opaque">Opaque</option>
+        <option value="tls">TLS</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="secret-name">Secret Name</label>
+      <input type="text" class="form-control" name="secret-name" placeholder="" required>
+    </div>
+  
+    <div class="form-group" id="list_data">
+      <label for="secret-data">Secret Data</label>
+      <div class="form-group row data">
+         <div class="col">
+         <input type="text" class="form-control key" placeholder="Key" required>
+         </div>
+         <div class="col">
+         <input type="text" class="form-control value" placeholder="Value" required>
+         </div>
+         <div class="col">
+            <button class="btn btn-success add_items_data" type="button">Add</button>
+         </div>
+      </div>
+      
+      
+    </div>
+
+    <div class="form-group">
+      <label for="file">File input</label>
+      <input type="file" class="form-control-file" id="file" multiple onchange="javascript:updateList()">
+      <p>Selected files:</p>
+      <div id="fileList"></div>
+    </div>
+
+    <button class="btn btn-primary" type="button" id="encrypt">Submit</button>
+  </form>
+  <form>
+   <div class="form-group">
+      <label for="output">Output</label>
+      <input type="text" class="form-control" name="secret-name" value="{{ key }} : {{ encrypted }}" readonly>
+    </div>
+  </form>
+
+{% endblock %}

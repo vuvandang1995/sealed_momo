@@ -1,14 +1,14 @@
 $(document).ready(function(){
     $(".add_items_data").click(function(){
         $("#list_data").append('<div class="form-group row data">\
-                                    <div class="col">\
+                                    <div class="col-md-5">\
                                     <input type="text" class="form-control key" placeholder="Key" required name="data_key">\
                                     </div>\
-                                    <div class="col">\
+                                    <div class="col-md-5">\
                                     <input type="text" class="form-control value" placeholder="Value" required name="data_value">\
                                     </div>\
                                     <div class="col">\
-                                    <button class="btn btn-danger delete_items_data" type="button">Delete</button>\
+                                    <button class="btn btn-danger delete_items_data" type="button" style="float: right;">Delete</button>\
                                     </div>\
                                 </div>');
     });

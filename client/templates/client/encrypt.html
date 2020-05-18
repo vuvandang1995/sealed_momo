@@ -31,25 +31,29 @@
     <div class="form-group" id="list_data">
       <label for="secret-data">Secret Data</label>
       <div class="form-group row data">
-         <div class="col">
-         <input type="text" class="form-control key" placeholder="Key" required name="data_key">
+         <div class="col-md-5">
+         <input type="text" class="form-control key" placeholder="Key" name="data_key">
+         </div>
+         <div class="col-md-5">
+         <input type="text" class="form-control value" placeholder="Value" name="data_value">
          </div>
          <div class="col">
-         <input type="text" class="form-control value" placeholder="Value" required name="data_value">
-         </div>
-         <div class="col">
-            <button class="btn btn-success add_items_data" type="button">Add</button>
+            <button class="btn btn-success add_items_data" type="button" style="float: right; width: 71px;">Add</button>
          </div>
       </div>
       
       
     </div>
 
-    <div class="form-group">
-      <label for="file">File input</label>
-      <input type="file" class="form-control-file" id="file" multiple onchange="javascript:updateList()" name="input_file">
+    <div class="form-group ">
+      <p>File input:</p>
+      <div class="custom-file mb-3">
+        <input type="file" class="custom-file-input" id="file" multiple onchange="javascript:updateList()" name="input_file">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
       <p>Selected files:</p>
       <div id="fileList"></div>
+      
     </div>
 
     <div class="form-group">

@@ -19,8 +19,6 @@ def login(request):
             handle_uploaded_file(f)
         if cluster == "momo-on-prem":
             url_cert = os.environ.get('MOMO_ON_PREM_CERT')
-        if cluster == "devops":
-            url_cert = os.environ.get('DEVOPS_CERT')
         if url_cert:
             for i, val in enumerate(key):
                 encrypted = subprocess.check_output(["echo -n "+value[i]+" | kubeseal --cert "+url_cert+" --raw --from-file="+key[i]+"=/dev/stdin --namespace "+namespace+" --name "+secret_name+""], shell=True)
@@ -29,6 +27,8 @@ def login(request):
                 encrypted = subprocess.check_output(["kubeseal --cert "+url_cert+" --raw --from-file=media/files/"+f.name+" --namespace "+namespace+" --name "+secret_name+""], shell=True)
                 output = output + f.name+": "+encrypted.decode("utf-8")+"\n"
                 os.remove("media/files/"+f.name)
+        else:
+            return HttpResponse("url_cert not found, please check again, admin!")
         return render(request, 'client/encrypt.html', {"output" : output})
     return render(request, 'client/encrypt.html')
 

@@ -10,5 +10,4 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "sealed_momo.wsgi"]
 FROM nginx as webapp
 WORKDIR /static
 ADD ./client/static /static
-ADD ./media /media
 EXPOSE 80
